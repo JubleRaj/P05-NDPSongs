@@ -71,11 +71,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<String> getAllSongs() {
-        ArrayList<String> songs = new ArrayList<String>();
+    public ArrayList<Song> getAllSongs() {
+        ArrayList<Song> songs = new ArrayList<Song>();
 
         String selectQuery = "SELECT " + COLUMN_ID + ","
-                + COLUMN_TITLE + COLUMN_SINGERS + COLUMN_YEAR + COLUMN_STARS + " FROM " + TABLE_NOTE;
+                + COLUMN_TITLE + ", " + COLUMN_SINGERS + ", " +COLUMN_YEAR + ", " + COLUMN_STARS + " FROM " + TABLE_NOTE;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -88,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String singers = cursor.getString(2);
                 String years = cursor.getString(3);
                 int stars = cursor.getInt(4);
-                Song obj = new Song(title, singers, years, stars);
+                Song obj = new Song(id, title, singers, years, stars);
                 songs.add(obj);
             } while (cursor.moveToNext());
         }

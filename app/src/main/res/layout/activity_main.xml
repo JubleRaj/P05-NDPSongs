@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter Song Title Here" />
+        android:hint="Enter Song Title Here"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textViewSingers"
@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter Singer's name here" />
+        android:hint="Enter Singer's name here"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textViewYear"
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:ems="10"
-        android:inputType="number"
-        android:text="Enter year of release here" />
+        android:hint="Enter year of release here"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textView6"
