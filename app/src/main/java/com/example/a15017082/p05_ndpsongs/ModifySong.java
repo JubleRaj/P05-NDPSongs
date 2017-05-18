@@ -47,6 +47,16 @@ public class ModifySong extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(ModifySong.this);
+                dbh.deleteNote(data.get_Id());
+                dbh.close();
+                finish();
+            }
+        });
     }
 
 
