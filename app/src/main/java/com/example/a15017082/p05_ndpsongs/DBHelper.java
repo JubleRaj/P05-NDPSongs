@@ -71,18 +71,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<Song> getAllSongs() {
-        //TODO return records in Java objects
-        ArrayList<Song> tasks = new ArrayList<Song>();
-        String selectQuery = "SELECT " + COLUMN_ID + ", "
-                + COLUMN_TITLE + ", "
-                + COLUMN_SINGERS + ", "
-                + COLUMN_YEAR + ", "
-                + COLUMN_STARS
-                + " FROM " + TABLE_NOTE;
+    public ArrayList<Song> getAllSongs(String keyword) {
+        ArrayList<Song> songs = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
+        String condition = COLUMN_TITLE + " Like ?";
+        String[] args = { "%" +  keyword + "%"};
+        Cursor cursor = db.query(TABLE_NOTE, columns, condition, args,
+                null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -91,12 +88,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 String singers = cursor.getString(2);
                 int years = cursor.getInt(3);
                 int stars = cursor.getInt(4);
-                Song obj = new Song(title, singers, years, stars);
-                tasks.add(obj);
+                Song obj = new Song(id, title, singers, years, stars);
+                songs.add(obj);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return tasks;
+        return songs;
     }
+
 }
