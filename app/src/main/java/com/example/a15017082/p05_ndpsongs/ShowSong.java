@@ -33,6 +33,14 @@ public class ShowSong extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ShowSong.this, ModifySong.class);
                 i.putExtra("song", al.get(position).get_Id());
+//                String data = al.get(position);
+//                String id = data.split(",")[0].split(":")[1];
+//                String content = data.split(",")[1].trim();
+//
+//                Song target = new Song(Integer.parseInt(id), content);
+//                i.putExtra("song", target);
+//                startActivityForResult(i, 9);
+
                 startActivity(i);
             }
         });
