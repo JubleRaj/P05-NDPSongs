@@ -86,7 +86,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 int id = cursor.getInt(0);
                 String title = cursor.getString(1);
                 String singers = cursor.getString(2);
-                int years = cursor.getInt(3);
+                String years = cursor.getString(3);
                 int stars = cursor.getInt(4);
                 Song obj = new Song(title, singers, years, stars);
                 songs.add(obj);
@@ -95,6 +95,20 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return songs;
+    }
+
+    public int updateSong(Song data){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, data.getTitle());
+        values.put(COLUMN_SINGERS, data.getSingers());
+        values.put(COLUMN_YEAR, data.getYear());
+        values.put(COLUMN_STARS, data.getStar());
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(data.get_Id())};
+        int result = db.update(TABLE_NOTE, values, condition, args);
+        db.close();
+        return result;
     }
 
 }
