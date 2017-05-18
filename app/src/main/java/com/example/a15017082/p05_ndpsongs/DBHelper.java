@@ -47,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertSong(String title, String singers, int year, int stars) {
+    public long insertSong(String title, String singers, int year, int stars) {
 
         //TODO insert the data into the database
         // Get an instance of the database for writing
@@ -61,9 +61,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_YEAR, year);
         values.put(COLUMN_STARS, stars);
         // Insert the row into the TABLE_TASK
-        db.insert(TABLE_NOTE, null, values);
-        // Close the database connection
+        long result = db.insert(TABLE_NOTE, null, values);
         db.close();
-
+        Log.d("SQL Insert",""+ result); //id returned, shouldn’t be -1
+        return result;
     }
 }

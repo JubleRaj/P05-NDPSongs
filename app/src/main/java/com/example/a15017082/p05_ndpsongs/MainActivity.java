@@ -1,5 +1,6 @@
 package com.example.a15017082.p05_ndpsongs;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,13 +49,24 @@ public class MainActivity extends AppCompatActivity {
                 DBHelper db = new DBHelper(MainActivity.this);
 
                 // Insert a task
-                db.insertSong(title, singers, year, star);
+                long row_affected = db.insertSong(title, singers, year, star);
                 db.close();
 
-                Toast.makeText(MainActivity.this, "Inserted!",
-                        Toast.LENGTH_LONG).show();
+                if (row_affected != -1){
+                    Toast.makeText(MainActivity.this, "Insert successful",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
 
+        });
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivity.this, secondActivity.class);
+                startActivity(i);
+            }
         });
     }
 }
