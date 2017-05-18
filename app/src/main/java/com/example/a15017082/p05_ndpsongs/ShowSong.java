@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class ShowSong extends AppCompatActivity {
 
@@ -20,8 +21,12 @@ public class ShowSong extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.lv);
 
         al = new ArrayList<String>();
+        DBHelper db = new DBHelper(this);
+
+        al = db.getAllSongs();
+
         aa = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, al);
+                R.layout.row, al);
         lv.setAdapter(aa);
 
 
