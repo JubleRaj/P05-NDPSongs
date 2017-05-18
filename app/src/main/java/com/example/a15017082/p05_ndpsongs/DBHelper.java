@@ -1,5 +1,6 @@
 package com.example.a15017082.p05_ndpsongs;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -46,4 +47,23 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void insertSong(String title, String singers, int year, int stars) {
+
+        //TODO insert the data into the database
+        // Get an instance of the database for writing
+        SQLiteDatabase db = this.getWritableDatabase();
+        // We use ContentValues object to store the values for
+        //  the db operation
+        ContentValues values = new ContentValues();
+        // Store the column name as key and the description as value
+        values.put(COLUMN_TITLE, title);
+        values.put(COLUMN_SINGERS, singers);
+        values.put(COLUMN_YEAR, year);
+        values.put(COLUMN_STARS, stars);
+        // Insert the row into the TABLE_TASK
+        db.insert(TABLE_NOTE, null, values);
+        // Close the database connection
+        db.close();
+
+    }
 }
