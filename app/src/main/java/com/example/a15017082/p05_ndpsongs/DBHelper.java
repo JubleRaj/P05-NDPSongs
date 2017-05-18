@@ -45,10 +45,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                          int newVersion) {
+        db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN song_name TEXT ");
     }
+
 
     public long insertSong(String title, String singers, int year, int stars) {
 
