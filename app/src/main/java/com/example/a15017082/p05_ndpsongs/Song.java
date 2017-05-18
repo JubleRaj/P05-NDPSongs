@@ -1,10 +1,12 @@
 package com.example.a15017082.p05_ndpsongs;
 
+import java.io.Serializable;
+
 /**
  * Created by 15017082 on 18/5/2017.
  */
 
-public class Song {
+public class Song implements Serializable{
 
     private int id;
     private String title;
