@@ -2,9 +2,12 @@ package com.example.a15017082.p05_ndpsongs;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by 15017082 on 18/5/2017.
@@ -65,5 +68,34 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         Log.d("SQL Insert",""+ result); //id returned, shouldn’t be -1
         return result;
+    }
+
+    public ArrayList<Song> getAllSongs() {
+        //TODO return records in Java objects
+        ArrayList<Song> tasks = new ArrayList<Song>();
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                + COLUMN_TITLE + ", "
+                + COLUMN_SINGERS + ", "
+                + COLUMN_YEAR + ", "
+                + COLUMN_STARS
+                + " FROM " + TABLE_NOTE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String singers = cursor.getString(2);
+                int years = cursor.getInt(3);
+                int stars = cursor.getInt(4);
+                Song obj = new Song(title, singers, years, stars);
+                tasks.add(obj);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return tasks;
     }
 }
